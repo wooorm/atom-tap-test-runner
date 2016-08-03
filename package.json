@@ -1,0 +1,63 @@
+{
+  "name": "atom-tap-test-runner",
+  "version": "0.0.0",
+  "description": "Run Atom package tests using TAP",
+  "license": "MIT",
+  "keywords": [
+    "atom",
+    "test",
+    "anything",
+    "tap"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "repository": "https://github.com/wooorm/atom-tap-test-runner",
+  "bugs": "https://github.com/wooorm/atom-tap-test-runner/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "glob": "^7.0.5",
+    "tap-parser": "^1.2.2",
+    "through2": "^2.0.1",
+    "tmp": "0.0.28"
+  },
+  "devDependencies": {
+    "execa": "^0.4.0",
+    "remark": "^5.0.0",
+    "remark-cli": "^1.0.0",
+    "remark-comment-config": "^4.0.0",
+    "remark-github": "^5.0.0",
+    "remark-lint": "^4.0.0",
+    "remark-validate-links": "^4.0.0",
+    "tape": "^4.6.0",
+    "xo": "^0.16.0"
+  },
+  "scripts": {
+    "build": "remark . --quiet --frail",
+    "lint": "xo",
+    "test-api": "tape test",
+    "test": "npm run build && npm run lint && npm run test-api"
+  },
+  "atomTestRunner": "./index.js",
+  "xo": {
+    "space": true
+  },
+  "remarkConfig": {
+    "output": true,
+    "plugins": {
+      "comment-config": null,
+      "github": null,
+      "lint": {
+        "heading-increment": false
+      },
+      "validate-links": null
+    },
+    "settings": {
+      "bullet": "*"
+    }
+  }
+}
