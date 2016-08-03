@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '0.12'
+- '6.0'
+os:
+- linux
+- osx
+script:
+- bash <(curl -s https://raw.githubusercontent.com/wooorm/atom-travis/master/install.sh)
+- export DISPLAY=":99"
+- npm test

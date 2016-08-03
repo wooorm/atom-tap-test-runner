@@ -28,6 +28,8 @@ test('success', function (t) {
   });
 
   execa('atom', ['--test', relative('nok.js')]).catch(function (err) {
+    var fp = path.join(__dirname, 'nok.js:9:5');
+
     t.equal(
       clean(err.stdout),
       [
@@ -41,7 +43,7 @@ test('success', function (t) {
         '    operator: ok',
         '    expected: true',
         '    actual:   false',
-        '    at: Test.<anonymous> (/Users/tilde/projects/oss/atom-tap-test-runner/test/nok.js:9:5)',
+        '    at: Test.<anonymous> (' + fp + ')',
         '  ...',
         '',
         '1..3',
