@@ -9,14 +9,14 @@
     "anything",
     "tap"
   ],
-  "files": [
-    "index.js"
-  ],
   "repository": "https://github.com/wooorm/atom-tap-test-runner",
   "bugs": "https://github.com/wooorm/atom-tap-test-runner/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "files": [
+    "index.js"
   ],
   "dependencies": {
     "debug": "^2.2.0",
@@ -44,16 +44,6 @@
   },
   "remarkConfig": {
     "output": true,
-    "plugins": {
-      "comment-config": null,
-      "github": null,
-      "lint": {
-        "heading-increment": false
-      },
-      "validate-links": null
-    },
-    "settings": {
-      "bullet": "*"
-    }
+    "presets": "wooorm"
   }
 }
