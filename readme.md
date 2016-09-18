@@ -1,6 +1,6 @@
 # atom-tap-test-runner [![Build Status][travis-badge]][travis]
 
-Since [atom/atom#8968][pr], it’s now possible to test projects in Atom
+Since [atom/atom#8968][pr], it’s possible to test projects in Atom
 without needing to use Jasmine.  Time for Tap!
 
 This project runs [TAP][] producing test files in an environment with
@@ -70,7 +70,7 @@ _not_ expand globs, and have [**glob**][glob] handle them instead.
 
 Because Atom doesn’t `process.exit()`, **atom-tap-test-runner** simulates
 the project exiting after a second of no output (`console.log` or
-`process.stdout`).  This timeout can be changed by passing `TAP_TIMEOUT`:
+`process.stdout`).  This timeout can be changed by setting `TAP_TIMEOUT`:
 
 ```sh
 TAP_TIMEOUT=5000 atom --test test.js
