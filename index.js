@@ -12,15 +12,12 @@
 
 /* Dependencies. */
 var util = require('util');
+var rProcess = require('electron').remote.process;
 var through = require('through2');
 var parser = require('tap-parser');
 var glob = require('glob');
 var tmp = require('tmp');
 var debug = require('debug')('atom:tap:test-runner');
-
-/* eslint-disable import/no-extraneous-dependencies */
-var rProcess = require('electron').remote.process;
-/* eslint-enable import/no-extraneous-dependencies */
 
 /* Expose. */
 module.exports = runner;
@@ -126,7 +123,9 @@ function runner(params) {
 
           /* Require each file. */
           try {
+            /* eslint-disable import/no-dynamic-require */
             require(file);
+            /* eslint-enable import/no-dynamic-require */
           } catch (err) {
             console.error(err.stack || err);
             resolve(1);
@@ -153,9 +152,11 @@ function delay(cb, timeout) {
   function tick() {
     clearTimeout(id);
 
-    id = setTimeout(function once() {
+    id = setTimeout(once, timeout);
+
+    function once() {
       cb();
       cb = function () {};
-    }, timeout);
+    }
   }
 }
