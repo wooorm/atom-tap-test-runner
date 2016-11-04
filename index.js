@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2016 Titus Wormer
- * @license MIT
- * @module atom:tap:test-runner
- * @fileoverview Run TAP tests in Atom.
- */
-
 'use strict';
 
 /* eslint-env node, browser */
@@ -22,9 +14,7 @@ var debug = require('debug')('atom:tap:test-runner');
 /* Expose. */
 module.exports = runner;
 
-/**
- * Test files and catch their TAP output.
- */
+/* Test files and catch their TAP output. */
 function runner(params) {
   var globs = params.testPaths;
 
