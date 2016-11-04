@@ -30,7 +30,7 @@ test('success', function (t) {
   });
 
   execa('atom', ['--test', relative('nok.js')]).catch(function (err) {
-    var fp = path.join(__dirname, 'nok.js:9:5');
+    var fp = path.join(__dirname, 'nok.js:11:5');
 
     t.equal(
       clean(err.stdout),
