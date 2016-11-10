@@ -9,9 +9,8 @@ test('success', function (t) {
 
   execa('atom', ['--test', relative('ok.js')]).then(function (res) {
     t.equal(
-      clean(res.stdout),
+      res.stdout,
       [
-        'Window load time: ???ms',
         'TAP version 13',
         '# testing atom',
         'ok 1 `atom` should have a `loadTime` prop',
@@ -33,9 +32,8 @@ test('success', function (t) {
     var fp = path.join(__dirname, 'nok.js:11:5');
 
     t.equal(
-      clean(err.stdout),
+      err.stdout,
       [
-        'Window load time: ???ms',
         'TAP version 13',
         '# testing atom',
         'ok 1 `atom` should have a `loadTime` prop',
@@ -59,10 +57,6 @@ test('success', function (t) {
     );
   });
 });
-
-function clean(value) {
-  return value.replace(/\d{2,}ms/, '???ms');
-}
 
 function relative(filename) {
   return path.relative(process.cwd(), path.resolve(__dirname, filename));
