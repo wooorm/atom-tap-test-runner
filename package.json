@@ -21,7 +21,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "glob": "^7.0.5",
-    "tap-parser": "^3.0.0",
+    "tap-parser": "^4.0.0",
     "tmp": "^0.0.30",
     "through2": "^2.0.1"
   },
