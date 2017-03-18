@@ -61,7 +61,8 @@ function runner(params) {
     });
 
     console.log = log(process.stdout);
-    console.error = debug.log = log(process.stderr);
+    console.error = log(process.stderr);
+    debug.log = console.error;
 
     /* Listen for fatal errors, which we cannot in normal Node ways. */
     window.addEventListener('error', function () {
@@ -91,7 +92,8 @@ function runner(params) {
 
       process.exit = function () {};
       process.emit('exit', 0);
-      evs.exit = exits = originals;
+      exits = originals;
+      evs.exit = originals;
       process.exit = fn;
 
       /* Finally, end the stream, so the tape parser ends
