@@ -6,7 +6,7 @@
 var util = require('util');
 var rProcess = require('electron').remote.process;
 var through = require('through2');
-var parser = require('tap-parser');
+var Parser = require('tap-parser');
 var glob = require('glob');
 var tmp = require('tmp');
 var debug = require('debug')('atom:tap:test-runner');
@@ -36,7 +36,7 @@ function runner(params) {
     var tick;
     var tap;
 
-    tap = parser(function (results) {
+    tap = new Parser(function (results) {
       resolve(results.ok ? 0 : 1);
     });
 
