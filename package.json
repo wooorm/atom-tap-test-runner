@@ -1,6 +1,6 @@
 {
   "name": "atom-tap-test-runner",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Run Atom package tests using TAP",
   "license": "MIT",
   "keywords": [
