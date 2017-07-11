@@ -2,7 +2,6 @@
 
 /* eslint-env node, browser */
 
-/* Dependencies. */
 var util = require('util');
 var rProcess = require('electron').remote.process;
 var through = require('through2');
@@ -11,7 +10,6 @@ var glob = require('glob');
 var tmp = require('tmp');
 var debug = require('debug')('atom:tap:test-runner');
 
-/* Expose. */
 module.exports = runner;
 
 /* Test files and catch their TAP output. */
@@ -27,32 +25,26 @@ function runner(params) {
     window: window
   });
 
-  return new Promise(function (resolve) {
+  return new Promise(executor);
+
+  function executor(resolve) {
     var evs = process._events;
     var exits = evs.exit;
     var exitCount;
     var timeout;
     var stdin;
     var tick;
-    var tap;
-
-    tap = new Parser(function (results) {
-      resolve(results.ok ? 0 : 1);
-    });
 
     /* Create a fake stream, which the things we require
      * will write their output to. */
     stdin = through();
 
+    /* Write to stdout and a tap parser */
     stdin.pipe(rProcess.stdout);
-
-    stdin.pipe(tap);
+    stdin.pipe(new Parser(ontapdone));
 
     /* Listen for writes, and reset clock if they happen. */
-    stdin.pipe(through(function (chunk, enc, callback) {
-      tick();
-      callback();
-    }));
+    stdin.pipe(through(onwrite));
 
     /* Set fake outputs, cannot set normally. */
     Object.defineProperties(process, {
@@ -65,11 +57,7 @@ function runner(params) {
     debug.log = console.error;
 
     /* Listen for fatal errors, which we cannot in normal Node ways. */
-    window.addEventListener('error', function () {
-      /* No need to log the error, chromium will do that already. */
-      resolve(1);
-      return true;
-    });
+    window.addEventListener('error', onerror);
 
     /* Timeout. */
     timeout = process.env.TAP_TIMEOUT || 1000;
@@ -84,13 +72,33 @@ function runner(params) {
      * tests by faking `process.exit()`, as TAP harnesses often
      * bind to that event.  We also set the real `process.exit`
      * to a no-op, as that’s often also invoked by harnesses. */
-    tick = delay(function () {
+    tick = delay(delayed, timeout);
+
+    /* Load all tests. */
+    globs.forEach(eachGlob);
+
+    function ontapdone(results) {
+      resolve(results.ok ? 0 : 1);
+    }
+
+    function onerror() {
+      /* No need to log the error, chromium will do that already. */
+      resolve(1);
+      return true;
+    }
+
+    function onwrite(chunk, enc, callback) {
+      tick();
+      callback();
+    }
+
+    function delayed() {
       var originals = exits.slice(0, exitCount);
       var fn = process.exit;
 
       evs.exit = exits.slice(exitCount);
 
-      process.exit = function () {};
+      process.exit = noop;
       process.emit('exit', 0);
       exits = originals;
       evs.exit = originals;
@@ -99,40 +107,45 @@ function runner(params) {
       /* Finally, end the stream, so the tape parser ends
        * as well. */
       stdin.end();
-    }, timeout);
+    }
 
-    /* Load all tests. */
-    globs.forEach(function (filePath) {
-      glob(filePath, function (err, files) {
-        if (err) {
-          console.error(err.stack || err);
-          resolve(1);
-          return;
-        }
+    function eachGlob(filePath) {
+      glob(filePath, onglob);
+    }
 
-        files.forEach(function (file) {
-          tick();
+    function onglob(err, files) {
+      if (err) {
+        console.error(err.stack || err);
+        resolve(1);
+        return;
+      }
 
-          /* Require each file. */
-          try {
-            /* eslint-disable import/no-dynamic-require */
-            require(file);
-            /* eslint-enable import/no-dynamic-require */
-          } catch (err) {
-            console.error(err.stack || err);
-            resolve(1);
-          }
-        });
-      });
-    });
-  });
+      files.forEach(eachFile);
+    }
+
+    function eachFile(file) {
+      tick();
+
+      /* Require each file. */
+      try {
+        /* eslint-disable import/no-dynamic-require */
+        require(file);
+        /* eslint-enable import/no-dynamic-require */
+      } catch (err) {
+        console.error(err.stack || err);
+        resolve(1);
+      }
+    }
+  }
 }
 
 /* Fix `console.*` calls, they look horrible otherwise. */
 function log(stream) {
-  return function () {
+  return logger;
+
+  function logger() {
     stream.write(util.format.apply(null, arguments) + '\n');
-  };
+  }
 }
 
 /* Call `cb` after `timeout` ms of `tick` not being called. */
@@ -148,7 +161,9 @@ function delay(cb, timeout) {
 
     function once() {
       cb();
-      cb = function () {};
+      cb = noop;
     }
   }
 }
+
+function noop() {}
