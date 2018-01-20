@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- '4.0'
-- '8.0'
+- '6.0'
+- '9.0'
 os:
 - linux
 - osx
@@ -17,4 +17,4 @@ deploy:
       secure: o5oIrdW3tKUroxCVUDu876Um6EZjw96RiExZhIzYbBg2V7HaIeLdinpyKC4Z9LxtGjS6w8TWEKfezhuwDqu37Nb+rIH2xzeuzf/DyDK1apfLARhpfcjIP6ZconxQhOviu9J5FztVmSmiNv78TKNuLo8tzWX2M8mTw29aQpV/yc4OLDe7A9RZcp9F04QXI6p8VCJ2+nMznInyZUcu6ye2pwWs46lUebetdrIuvvho5myVx+BFgNoVua6wEe/SOB+gc1YOA9BvLBnvmKVDKF1qQwWfj+nJwHWiDqfM7TGb+9xppika1Sjo2PbNHg5UP8y4hAHB8iXL6duQ+Qui4QUcWicL5s99Sb727gd6clKHHyRityUd8gULhfM/1G4HIUpazxntEQdXtlI5id5zr6q0uEpj8UCnWwpi8IWl/0iAVRrFvp/lMgbFNsXoawJM0LgkEEEywh/IOq3UuOa0r+nlz6rVNbRkJRqa+oUUxpr+d1Ps6RoOlVdcp9AlaUQA8l4cAToCiI0MCM++Ryon63KjpGo5SlWz8VR00/Yo97FNrSRjxaKKFiBoGfRNP9ZXhoXjYtQKBaQhIz4n2KZOytd2wFEYIThlEKSTf06AqY8LdXKjndng9zqvJu5v7K6TcAl1KmPZA3pvqYaXxUxnKqUxK7LV88fJv4S+gcHElMYw6K4=
     on:
       tags: true
-      node: '4.0'
+      node: '9.0'
