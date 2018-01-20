@@ -9,7 +9,7 @@
     "anything",
     "tap"
   ],
-  "repository": "https://github.com/wooorm/atom-tap-test-runner",
+  "repository": "wooorm/atom-tap-test-runner",
   "bugs": "https://github.com/wooorm/atom-tap-test-runner/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
@@ -44,6 +44,8 @@
     "esnext": false
   },
   "remarkConfig": {
-    "plugins": ["preset-wooorm"]
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }
