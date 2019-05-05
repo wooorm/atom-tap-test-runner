@@ -28,11 +28,11 @@ test('success', function (t) {
     );
   });
 
-  execa('atom', ['--test', relative('nok.js')]).catch(function (err) {
-    var fp = path.join(__dirname, 'nok.js:11:5');
+  execa('atom', ['--test', relative('nok.js')]).catch(function (error) {
+    var res = error.stdout.split('\n').filter(filterStack).join('\n');
 
     t.equal(
-      err.stdout,
+      res,
       [
         'TAP version 13',
         '# testing atom',
@@ -43,7 +43,8 @@ test('success', function (t) {
         '    operator: ok',
         '    expected: true',
         '    actual:   false',
-        '    at: Test.<anonymous> (' + fp + ')',
+        '    stack: |-',
+        '      Error: `loadTime` should be bigger than five seconds',
         '  ...',
         '',
         '1..3',
@@ -55,6 +56,10 @@ test('success', function (t) {
       ].join('\n'),
       'should report failures'
     );
+
+    function filterStack(line) {
+      return !/^\s+at/.test(line);
+    }
   });
 });
 
