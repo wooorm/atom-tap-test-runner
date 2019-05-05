@@ -19,11 +19,11 @@
     "index.js"
   ],
   "dependencies": {
-    "debug": "^3.0.0",
+    "debug": "^4.0.0",
     "glob": "^7.0.5",
-    "tap-parser": "^7.0.0",
-    "tmp": "^0.0.33",
-    "through2": "^2.0.1"
+    "tap-parser": "^9.0.0",
+    "tmp": "^0.1.0",
+    "through2": "^3.0.0"
   },
   "devDependencies": {
     "execa": "^1.0.0",
