@@ -1,13 +1,13 @@
-'use strict';
+'use strict'
 
-var path = require('path');
-var test = require('tape');
-var execa = require('execa');
+var path = require('path')
+var test = require('tape')
+var execa = require('execa')
 
-test('success', function (t) {
-  t.plan(2);
+test('success', function(t) {
+  t.plan(2)
 
-  execa('atom', ['--test', relative('ok.js')]).then(function (res) {
+  execa('atom', ['--test', relative('ok.js')]).then(function(res) {
     t.equal(
       res.stdout,
       [
@@ -25,11 +25,14 @@ test('success', function (t) {
         ''
       ].join('\n'),
       'should report successes'
-    );
-  });
+    )
+  })
 
-  execa('atom', ['--test', relative('nok.js')]).catch(function (error) {
-    var res = error.stdout.split('\n').filter(filterStack).join('\n');
+  execa('atom', ['--test', relative('nok.js')]).catch(function(error) {
+    var res = error.stdout
+      .split('\n')
+      .filter(filterStack)
+      .join('\n')
 
     t.equal(
       res,
@@ -55,14 +58,14 @@ test('success', function (t) {
         ''
       ].join('\n'),
       'should report failures'
-    );
+    )
 
     function filterStack(line) {
-      return !/^\s+at/.test(line);
+      return !/^\s+at/.test(line)
     }
-  });
-});
+  })
+})
 
 function relative(filename) {
-  return path.relative(process.cwd(), path.resolve(__dirname, filename));
+  return path.relative(process.cwd(), path.resolve(__dirname, filename))
 }

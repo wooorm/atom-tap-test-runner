@@ -27,20 +27,28 @@
   },
   "devDependencies": {
     "execa": "^1.0.0",
+    "prettier": "^1.17.0",
     "remark-cli": "^6.0.0",
     "remark-preset-wooorm": "^4.0.0",
     "tape": "^4.6.0",
     "xo": "^0.24.0"
   },
   "scripts": {
-    "build": "remark . -qfo",
-    "lint": "xo",
+    "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
     "test-api": "tape test",
-    "test": "npm run build && npm run lint && npm run test-api"
+    "test": "npm run format && npm run test-api"
   },
   "atomTestRunner": "./index.js",
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
   "xo": {
-    "space": true,
+    "prettier": true,
     "esnext": false
   },
   "remarkConfig": {

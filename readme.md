@@ -31,14 +31,14 @@ Then, add a [TAP][]-producing test file, such as the following
 `test.js` (note: I like [tape][], but you can use whatever):
 
 ```js
-var test = require('tape');
+var test = require('tape')
 
-test('atom', function (t) {
-  t.plan(3);
-  t.ok('loadTime' in atom, 'should have a `loadTime` prop');
-  t.equal(typeof atom.loadTime, 'number', '`loadTime` should be a number');
-  t.ok(atom.loadTime < 1000, '`loadTime` should be less than a second');
-});
+test('atom', function(t) {
+  t.plan(3)
+  t.ok('loadTime' in atom, 'should have a `loadTime` prop')
+  t.equal(typeof atom.loadTime, 'number', '`loadTime` should be a number')
+  t.ok(atom.loadTime < 1000, '`loadTime` should be less than a second')
+})
 ```
 
 Now, to run your tests, run the following in your shell:
@@ -60,7 +60,7 @@ scope.
 Passing globs, or multiple files, can be done like so:
 
 ```sh
-atom --test 'test/**/*.js' 'test.js'
+atom --test "test/**/*.js" "test.js"
 ```
 
 The quotes are only needed if you want glob-supporting shells to
