@@ -76,23 +76,13 @@ the project exiting after a second of no output (`console.log` or
 TAP_TIMEOUT=5000 atom --test test.js
 ```
 
-###### Chromium Logging
-
-To remove Chromium logging, either uses [**silence-chromium**][silence-chromium]
-(a good solution), or direct all **stderr**(4) output to `/dev/null`
-(not a very good solution):
-
-```sh
-atom --test test.js 2> /dev/null
-```
-
 ###### Formatters
 
 Any [TAP reporters][reporters] works (be careful of exit codes though),
 here’s an example of [**tap-difflet**][tap-difflet]:
 
 ```sh
-atom --test test.js 2> silence-chromium | tap-difflet
+atom --test test.js | tap-difflet
 ```
 
 Yields:
@@ -201,8 +191,6 @@ Yields (1 is not OK):
 [tap]: https://testanything.org
 
 [tape]: https://github.com/substack/tape
-
-[silence-chromium]: https://github.com/beaugunderson/silence-chromium
 
 [successful]: #successful-output
 
