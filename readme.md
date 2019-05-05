@@ -88,29 +88,23 @@ atom --test test.js | tap-difflet
 Yields:
 
 ```txt
-    Window load time: 769ms
-
-  atom
-    ✓ should have a `loadTime` prop
+  testing atom
+    ✓ `atom` should have a `loadTime` prop
     ✓ `loadTime` should be a number
-    ✓ `loadTime` should be less than a second
+    ✓ `loadTime` should be less than five seconds
 
-3 passing (3.1s)
+3 passing (4.2s)
 ```
 
 ###### Successful Output
 
-If the tests succeeded, you’ll see something like this (the first two
-lines are debugging from Electron/Atom):
+If the tests succeeded, you’ll see something like this:
 
 ```txt
-[22204:0803/174406:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale English
-Window load time: 944ms
-TAP version 13
-# atom
-ok 1 should have a `loadTime` prop
+# testing atom
+ok 1 `atom` should have a `loadTime` prop
 ok 2 `loadTime` should be a number
-ok 3 `loadTime` should be less than a second
+ok 3 `loadTime` should be less than five seconds
 
 1..3
 # tests 3
@@ -137,19 +131,30 @@ If the tests failed, you’ll see something like this (the first two
 lines are debugging from Electron/Atom):
 
 ```txt
-[22315:0803/175537:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale English
-Window load time: 1274ms
 TAP version 13
 # testing atom
-It works!
 ok 1 `atom` should have a `loadTime` prop
 ok 2 `loadTime` should be a number
-not ok 3 `loadTime` should be less than a second
+not ok 3 `loadTime` should be bigger than five seconds
   ---
     operator: ok
     expected: true
     actual:   false
     at: Test.<anonymous> (~/my-package/test.js:11:5)
+    stack: |-
+      Error: `loadTime` should be bigger than five seconds
+          at Test.assert [as _assert] (~/my-package/node_modules/tape/lib/test.js:226:54)
+          at Test.bound [as _assert] (~/my-package/node_modules/tape/lib/test.js:77:32)
+          at Test.assert (~/my-package/node_modules/tape/lib/test.js:344:10)
+          at Test.bound [as ok] (~/my-package/node_modules/tape/lib/test.js:77:32)
+          at Test.<anonymous> (~/my-package/test/nok.js:11:5)
+          at Test.bound [as _cb] (~/my-package/node_modules/tape/lib/test.js:77:32)
+          at Test.run (~/my-package/node_modules/tape/lib/test.js:96:10)
+          at Test.bound [as run] (~/my-package/node_modules/tape/lib/test.js:77:32)
+          at Immediate.next (~/my-package/node_modules/tape/lib/results.js:75:19)
+          at runCallback (timers.js:789:20)
+          at tryOnImmediate (timers.js:751:5)
+          at processImmediate [as _immediateCallback] (timers.js:722:5)
   ...
 
 1..3
