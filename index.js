@@ -128,11 +128,9 @@ function runner(params) {
 
       /* Require each file. */
       try {
-        /* eslint-disable import/no-dynamic-require */
         require(file);
-        /* eslint-enable import/no-dynamic-require */
-      } catch (err) {
-        console.error(err.stack || err);
+      } catch (error) {
+        console.error(error.stack || error);
         resolve(1);
       }
     }
