@@ -194,11 +194,11 @@ Yields (1 is not OK):
 
 [license]: license
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
 [pr]: https://github.com/atom/atom/pull/8968
 
-[tap]: http://testanything.org
+[tap]: https://testanything.org
 
 [tape]: https://github.com/substack/tape
 
