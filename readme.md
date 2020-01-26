@@ -1,20 +1,21 @@
-# atom-tap-test-runner [![Build Status][travis-badge]][travis]
+# `atom-tap-test-runner` [![Build Status][travis-badge]][travis]
 
-Since [atom/atom#8968][pr], it’s possible to test projects in Atom
-without needing to use Jasmine.  Time for Tap!
+Since [`atom/atom#8968`][pr], it’s possible to test projects in Atom without
+needing to use Jasmine.
+Time for Tap!
 
-This project runs [TAP][] producing test files in an environment with
-`atom` available.
+This project runs [TAP][] producing test files in an environment with `atom`
+available.
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install atom-tap-test-runner --save-dev
 ```
 
-## Usage
+## Use
 
 Add the following line to your `package.json`:
 
@@ -27,8 +28,8 @@ Add the following line to your `package.json`:
  }
 ```
 
-Then, add a [TAP][]-producing test file, such as the following
-`test.js` (note: I like [tape][], but you can use whatever):
+Then, add a [TAP][]-producing test file, such as the following `test.js` (note:
+I like [tape][], but you can use whatever):
 
 ```js
 var test = require('tape')
@@ -47,13 +48,13 @@ Now, to run your tests, run the following in your shell:
 atom --test test.js
 ```
 
-Depending on how fast Atom started, you’ll see [successful][] or
-[erroneous][] output.
+Depending on how fast Atom started, you’ll see [successful][] or [erroneous][]
+output.
 
 ## API
 
-There’s not much API.  There’s the `atom` global added to the global
-scope.
+There’s not much API.
+There’s the `atom` global added to the global scope.
 
 ###### Multiple files
 
@@ -63,14 +64,14 @@ Passing globs, or multiple files, can be done like so:
 atom --test "test/**/*.js" "test.js"
 ```
 
-The quotes are only needed if you want glob-supporting shells to
-_not_ expand globs, and have [**glob**][glob] handle them instead.
+The quotes are only needed if you want glob-supporting shells to *not* expand
+globs, and have [**glob**][glob] handle them instead.
 
 ###### `TAP_TIMEOUT`
 
-Because Atom doesn’t `process.exit()`, **atom-tap-test-runner** simulates
-the project exiting after a second of no output (`console.log` or
-`process.stdout`).  This timeout can be changed by setting `TAP_TIMEOUT`:
+Because Atom doesn’t `process.exit()`, **atom-tap-test-runner** simulates the
+project exiting after a second of no output (`console.log` or `process.stdout`).
+This timeout can be changed by setting `TAP_TIMEOUT`:
 
 ```sh
 TAP_TIMEOUT=5000 atom --test test.js
@@ -78,8 +79,8 @@ TAP_TIMEOUT=5000 atom --test test.js
 
 ###### Formatters
 
-Any [TAP reporters][reporters] works (be careful of exit codes though),
-here’s an example of [**tap-difflet**][tap-difflet]:
+Any [TAP reporters][reporters] works (be careful of exit codes though), here’s
+an example of [`tap-difflet`][tap-difflet]:
 
 ```sh
 atom --test test.js | tap-difflet
@@ -96,7 +97,7 @@ Yields:
 3 passing (4.2s)
 ```
 
-###### Successful Output
+###### Successful output
 
 If the tests succeeded, you’ll see something like this:
 
@@ -113,7 +114,7 @@ ok 3 `loadTime` should be less than five seconds
 # ok
 ```
 
-...and the exit code:
+…and the exit code:
 
 ```sh
 echo $?
@@ -125,10 +126,9 @@ Yields (0 is OK):
 0
 ```
 
-###### Erroneous Output
+###### Erroneous output
 
-If the tests failed, you’ll see something like this (the first two
-lines are debugging from Electron/Atom):
+If the tests failed, you’ll see something like this:
 
 ```txt
 TAP version 13
