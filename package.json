@@ -30,7 +30,6 @@
     "through2": "^3.0.0"
   },
   "devDependencies": {
-    "execa": "^1.0.0",
     "prettier": "^1.0.0",
     "remark-cli": "^7.0.0",
     "remark-preset-wooorm": "^6.0.0",

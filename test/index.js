@@ -1,16 +1,19 @@
 'use strict'
 
+var childProcess = require('child_process')
+var promisify = require('util').promisify
 var path = require('path')
 var test = require('tape')
-var execa = require('execa')
+
+var exec = promisify(childProcess.exec)
 
 test('success', function(t) {
   Promise.resolve()
     .then(function() {
-      return execa('atom', ['--test', relative('ok.js')])
+      return exec('atom --test ' + relative('ok.js'))
     })
     .then(function(res) {
-      t.equal(
+      t.deepEqual(
         res.stdout,
         [
           'TAP version 13',
@@ -24,13 +27,14 @@ test('success', function(t) {
           '# pass  3',
           '',
           '# ok',
+          '',
           ''
         ].join('\n'),
         'should report successes'
       )
     })
     .then(function() {
-      return execa('atom', ['--test', relative('nok.js')])
+      return exec('atom --test ' + relative('nok.js'))
     })
     .catch(function(error) {
       var res = error.stdout
