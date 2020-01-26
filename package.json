@@ -31,11 +31,11 @@
   },
   "devDependencies": {
     "execa": "^1.0.0",
-    "prettier": "^1.17.0",
-    "remark-cli": "^6.0.0",
-    "remark-preset-wooorm": "^4.0.0",
-    "tape": "^4.6.0",
-    "xo": "^0.24.0"
+    "prettier": "^1.0.0",
+    "remark-cli": "^7.0.0",
+    "remark-preset-wooorm": "^6.0.0",
+    "tape": "^4.0.0",
+    "xo": "^0.25.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
@@ -53,7 +53,10 @@
   },
   "xo": {
     "prettier": true,
-    "esnext": false
+    "esnext": false,
+    "rules": {
+      "unicorn/prefer-reflect-apply": "off"
+    }
   },
   "remarkConfig": {
     "plugins": [
