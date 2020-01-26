@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-- lts/boron
-- node
+  - lts/dubnium
+  - node
 os:
-- linux
-- osx
+  - linux
+  - osx
 dist: trusty
 script:
-- bash <(curl -s https://raw.githubusercontent.com/wooorm/atom-travis/master/install.sh)
-- export DISPLAY=":99"
-- npm test
+  - bash <(curl -s https://raw.githubusercontent.com/wooorm/atom-travis/master/install.sh)
+  - export DISPLAY=":99"
+  - npm test
