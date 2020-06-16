@@ -13,12 +13,12 @@ var debug = require('debug')('atom:tap:test-runner')
 module.exports = runner
 
 // Test files and catch their TAP output.
-function runner(params) {
-  var globs = params.testPaths
+function runner(parameters) {
+  var globs = parameters.testPaths
 
   // Create an Atom.
-  global.atom = params.buildAtomEnvironment({
-    applicationDelegate: params.buildDefaultApplicationDelegate(),
+  global.atom = parameters.buildAtomEnvironment({
+    applicationDelegate: parameters.buildDefaultApplicationDelegate(),
     configDirPath: tmp.dirSync().name,
     enablePersistence: true,
     document: document,

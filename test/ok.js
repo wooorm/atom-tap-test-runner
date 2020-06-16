@@ -3,7 +3,7 @@
 /* global atom */
 var test = require('tape')
 
-test('testing atom', function(t) {
+test('testing atom', function (t) {
   t.plan(3)
 
   t.ok('loadTime' in atom, '`atom` should have a `loadTime` prop')

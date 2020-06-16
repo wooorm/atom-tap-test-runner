@@ -7,14 +7,14 @@ var test = require('tape')
 
 var exec = promisify(childProcess.exec)
 
-test('success', function(t) {
+test('success', function (t) {
   Promise.resolve()
-    .then(function() {
+    .then(function () {
       return exec('atom --test ' + relative('ok.js'))
     })
-    .then(function(res) {
+    .then(function (result) {
       t.deepEqual(
-        res.stdout,
+        result.stdout,
         [
           'TAP version 13',
           '# testing atom',
@@ -33,17 +33,14 @@ test('success', function(t) {
         'should report successes'
       )
     })
-    .then(function() {
+    .then(function () {
       return exec('atom --test ' + relative('nok.js'))
     })
-    .catch(function(error) {
-      var res = error.stdout
-        .split('\n')
-        .filter(filterStack)
-        .join('\n')
+    .catch(function (error) {
+      var result = error.stdout.split('\n').filter(filterStack).join('\n')
 
       t.equal(
-        res,
+        result,
         [
           'TAP version 13',
           '# testing atom',
@@ -72,7 +69,7 @@ test('success', function(t) {
         return !/^\s+at/.test(line)
       }
     })
-    .then(function() {
+    .then(function () {
       t.end()
     })
 })
