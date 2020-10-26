@@ -2,7 +2,7 @@
 
 /* eslint-env node, browser */
 
-var util = require('util')
+var format = require('util').format
 var rProcess = require('electron').remote.process
 var through = require('through2')
 var Parser = require('tap-parser')
@@ -142,7 +142,7 @@ function log(stream) {
   return logger
 
   function logger() {
-    stream.write(util.format.apply(null, arguments) + '\n')
+    stream.write(format.apply(null, arguments) + '\n')
   }
 }
 
