@@ -1,4 +1,6 @@
-# `atom-tap-test-runner` [![Build Status][travis-badge]][travis]
+# `atom-tap-test-runner`
+
+[![Build][build-badge]][build]
 
 Since [`atom/atom#8968`][pr], it’s possible to test projects in Atom without
 needing to use Jasmine.
@@ -181,9 +183,9 @@ Yields (1 is not OK):
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/atom-tap-test-runner.svg
+[build-badge]: https://github.com/wooorm/longest-streak/workflows/main/badge.svg
 
-[travis]: https://travis-ci.org/wooorm/atom-tap-test-runner
+[build]: https://github.com/wooorm/longest-streak/actions
 
 [npm]: https://docs.npmjs.com/cli/install
 
