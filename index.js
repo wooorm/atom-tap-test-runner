@@ -34,6 +34,7 @@ function runner(parameters) {
     var timeout
     var stdin
     var tick
+    var index
 
     // Create a fake stream, which the things we require will write their output
     // to.
@@ -76,7 +77,10 @@ function runner(parameters) {
     tick = delay(delayed, timeout)
 
     // Load all tests.
-    globs.forEach(eachGlob)
+    index = -1
+    while (++index < globs.length) {
+      glob(globs[index], onglob)
+    }
 
     function ontapdone(results) {
       resolve(results.ok ? 0 : 1)
@@ -109,29 +113,25 @@ function runner(parameters) {
       stdin.end()
     }
 
-    function eachGlob(filePath) {
-      glob(filePath, onglob)
-    }
+    function onglob(error, files) {
+      var index = -1
 
-    function onglob(err, files) {
-      if (err) {
-        console.error(err.stack || err)
+      if (error) {
+        console.error(error.stack || error)
         resolve(1)
         return
       }
 
-      files.forEach(eachFile)
-    }
+      while (++index < files.length) {
+        tick()
 
-    function eachFile(file) {
-      tick()
-
-      // Require each file.
-      try {
-        require(file)
-      } catch (error) {
-        console.error(error.stack || error)
-        resolve(1)
+        // Require each file.
+        try {
+          require(files[index])
+        } catch (error) {
+          console.error(error.stack || error)
+          resolve(1)
+        }
       }
     }
   }

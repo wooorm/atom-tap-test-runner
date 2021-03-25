@@ -37,7 +37,10 @@ test('success', function (t) {
       return exec('atom --test ' + relative('nok.js'))
     })
     .catch(function (error) {
-      var result = error.stdout.split('\n').filter(filterStack).join('\n')
+      var result = error.stdout
+        .split('\n')
+        .filter((line) => !/^\s+at/.test(line))
+        .join('\n')
 
       t.equal(
         result,
@@ -64,10 +67,6 @@ test('success', function (t) {
         ].join('\n'),
         'should report failures'
       )
-
-      function filterStack(line) {
-        return !/^\s+at/.test(line)
-      }
     })
     .then(function () {
       t.end()
