@@ -1,66 +1,6 @@
 {
   "name": "atom-tap-test-runner",
-  "version": "7.0.2",
-  "description": "Run Atom package tests using TAP",
-  "license": "MIT",
-  "keywords": [
-    "atom",
-    "test",
-    "anything",
-    "tap"
-  ],
+  "version": "8.0.0",
   "repository": "wooorm/atom-tap-test-runner",
-  "bugs": "https://github.com/wooorm/atom-tap-test-runner/issues",
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/wooorm"
-  },
-  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
-  "contributors": [
-    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
-  ],
-  "files": [
-    "index.js"
-  ],
-  "dependencies": {
-    "debug": "^4.0.0",
-    "glob": "^7.0.5",
-    "tap-parser": "^10.0.0",
-    "through2": "^4.0.0",
-    "tmp": "^0.2.0"
-  },
-  "devDependencies": {
-    "prettier": "^2.0.0",
-    "remark-cli": "^9.0.0",
-    "remark-preset-wooorm": "^8.0.0",
-    "tape": "^5.0.0",
-    "xo": "^0.38.0"
-  },
-  "scripts": {
-    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
-    "test-api": "tape test",
-    "test": "npm run format && npm run test-api"
-  },
-  "atomTestRunner": "./index.js",
-  "prettier": {
-    "tabWidth": 2,
-    "useTabs": false,
-    "singleQuote": true,
-    "bracketSpacing": false,
-    "semi": false,
-    "trailingComma": "none"
-  },
-  "xo": {
-    "prettier": true,
-    "esnext": false,
-    "rules": {
-      "unicorn/no-fn-reference-in-iterator": "off",
-      "unicorn/prefer-reflect-apply": "off"
-    }
-  },
-  "remarkConfig": {
-    "plugins": [
-      "preset-wooorm"
-    ]
-  }
+  "bugs": "https://github.com/wooorm/atom-tap-test-runner/issues"
 }
